@@ -55,9 +55,7 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "dependencies": {
-    "intersection-observer": "^0.11.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
     "@commitlint/cli": "^17.1.2",

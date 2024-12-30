@@ -31,12 +31,7 @@ export function getCookie(name: string) {
 }
 
 /** 平台 */
-export type Platform =
-  | 'xxx'
-  | 'wechat'
-  | 'weibo'
-  | 'qq'
-  | '_default';
+export type Platform = 'xxx' | 'wechat' | 'weibo' | 'qq' | '_default';
 
 /**
  * 获取当前的运行平台
@@ -45,8 +40,7 @@ export function getPlatform(): Platform {
   let platform: Platform = 'xxx';
 
   const ua = window.navigator.userAgent;
-  const impl = getCookie('impl') || '';
-  if (/xxx/i.test(ua) || /xxx/i.test(impl)) {
+  if (/xxx/i.test(ua)) {
     platform = 'xxx';
   } else if (/micromessenger/i.test(ua)) {
     platform = 'wechat';
@@ -73,16 +67,13 @@ export function setStorageShowSafeBar() {
  * @param notgoApp 是否不跳转到应用，默认为false
  */
 export const jumpApp = ({
-  cid,
-  iting,
   notgoApp,
   extraInfo = {},
 }: {
-  cid: string;
-  iting: string;
   notgoApp?: boolean;
   extraInfo?: Record<string, any>;
 }) => {
+  console.log('extraInfo', extraInfo);
   if (!notgoApp) {
     setStorageShowSafeBar();
   }
@@ -95,13 +86,13 @@ export const jumpApp = ({
  *
  * @returns 返回一个字符串，包含用于在微信中打开应用的HTML标签
  */
-export function createWxHtml(iting: string, appid = X_APPID) {
+export function createWxHtml(appid = X_APPID) {
   return `
     <wx-open-launch-app
       class="arouse_wxtag"
       id="launch-btn"
       appid="${appid}"
-      extinfo="${iting}"
+      extinfo=""
       style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 9;"
     >
       <template>
@@ -112,27 +103,24 @@ export function createWxHtml(iting: string, appid = X_APPID) {
 `;
 }
 
-function changeWxExtinfo(extag: any, iting: string): void {
+function changeWxExtinfo(extag: any): void {
   if (!extag) return;
-  console.log('changeWxExtinfo', iting);
-  extag.setAttribute('extinfo', iting);
+  console.log('changeWxExtinfo');
+  extag.setAttribute('extinfo');
 }
 
 export function initWeixinOpenTag({
   domElement,
-  iting,
   callBack,
   appid,
-  cid,
   extraInfo,
 }: {
   domElement: HTMLElement;
-  iting: string;
   appid?: string;
-  cid: string;
   callBack?: () => void;
   extraInfo?: Record<string, any>;
 }) {
+  console.log('appid', appid);
   if (getPlatform() !== 'wechat' || !domElement) return;
   // 添加 style 逻辑
   if (domElement) {
@@ -144,24 +132,24 @@ export function initWeixinOpenTag({
   // 在微信标签上修改
   if (domElement.getElementsByClassName('arouse_wxtag')[0]) {
     const wxTagDom = domElement.getElementsByTagName('wx-open-launch-app')[0];
-    changeWxExtinfo(wxTagDom, iting);
+    changeWxExtinfo(wxTagDom);
     return;
   }
   const fragment = document
     .createRange()
-    .createContextualFragment(createWxHtml(iting, appid));
+    .createContextualFragment(createWxHtml());
   domElement.appendChild(fragment);
   const wxLaunchBtn = domElement.getElementsByClassName('arouse_wxtag')[0];
   if (wxLaunchBtn) {
     wxLaunchBtn.addEventListener('launch', function () {
       console.log('wxLaunchBtn launch');
       callBack?.();
-      jumpApp({ iting, notgoApp: true, cid, extraInfo });
+      jumpApp({ notgoApp: true, extraInfo });
     });
     wxLaunchBtn.addEventListener('error', function () {
       console.log('wxLaunchBtn error');
       callBack?.();
-      jumpApp({ iting, cid, extraInfo });
+      jumpApp({ extraInfo });
     });
   }
 }

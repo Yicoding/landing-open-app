@@ -23,18 +23,12 @@ yarn add landing-open-app
 
 ## API
 
-| 属性               | 说明                                 | 类型                  | 默认值          |
-| ------------------ | ------------------------------------ | --------------------- | --------------- |
-| btnText            | 按钮文案                             | `string`              | `畅听精彩内容`  |
-| contentLeftElement | 自定义主体左侧内容                   | `React.ReactNode`     | -               |
-| contentElement     | 自定义主体内容                       | `React.ReactNode`     | -               |
-| rootClassName      | 根节点样式                           | `string`              | -               |
-| ready              | 微信 sdk 是否加载完成                | `boolean`             | `false`         |
-| appid              | 所需跳转的移动应用的 AppID           | `string`              | - |
-| cid                | 唤端 cid                             | `string`              | -               |
-| extraInfo          | 串码额外上报信息                     | `Record<string, any>` | `{}`            |
-| iting              | iting 跳转地址                       | `string`              | -               |
-| callBack           | 跳转成功后回调（可在此方法上报埋点） | `void`                | -               |
+| 属性      | 说明                                 | 类型                  | 默认值  |
+| --------- | ------------------------------------ | --------------------- | ------- |
+| ready     | 微信 sdk 是否加载完成                | `boolean`             | `false` |
+| appid     | 所需跳转的移动应用的 AppID           | `string`              | -       |
+| extraInfo | 额外上报信息                         | `Record<string, any>` | `{}`    |
+| callBack  | 跳转成功后回调（可在此方法上报埋点） | `void`                | -       |
 
 ## 说明
 

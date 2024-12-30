@@ -1,7 +1,7 @@
 ---
 hero:
   title: landing-open-app
-  description: 站外唤起app组件
+  description: 站外唤起 app 组件
   actions:
     - text: 快速上手
       link: /components/landing-open-app

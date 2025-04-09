@@ -7,4 +7,6 @@ export type WxLabelParams = {
   callBack?: () => void;
   /** 额外上报信息 */
   extraInfo?: Record<string, any>;
+  /** 微信标签的extinfo */
+  extinfo?: string;
 };

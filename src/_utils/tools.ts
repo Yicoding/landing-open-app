@@ -1,4 +1,4 @@
-import { X_APPID } from './constants';
+import { APPID } from './constants';
 
 /** 设备类型 */
 export type Device = 'android' | 'ios';
@@ -86,13 +86,13 @@ export const jumpApp = ({
  *
  * @returns 返回一个字符串，包含用于在微信中打开应用的HTML标签
  */
-export function createWxHtml(appid = X_APPID) {
+export function createWxHtml(appid = APPID, extinfo?: string) {
   return `
     <wx-open-launch-app
       class="arouse_wxtag"
       id="launch-btn"
       appid="${appid}"
-      extinfo=""
+      extinfo="${extinfo}"
       style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 9;"
     >
       <template>
@@ -114,13 +114,14 @@ export function initWeixinOpenTag({
   callBack,
   appid,
   extraInfo,
+  extinfo,
 }: {
   domElement: HTMLElement;
   appid?: string;
   callBack?: () => void;
   extraInfo?: Record<string, any>;
+  extinfo?: string;
 }) {
-  console.log('appid', appid);
   if (getPlatform() !== 'wechat' || !domElement) return;
   // 添加 style 逻辑
   if (domElement) {
@@ -137,7 +138,7 @@ export function initWeixinOpenTag({
   }
   const fragment = document
     .createRange()
-    .createContextualFragment(createWxHtml());
+    .createContextualFragment(createWxHtml(appid, extinfo));
   domElement.appendChild(fragment);
   const wxLaunchBtn = domElement.getElementsByClassName('arouse_wxtag')[0];
   if (wxLaunchBtn) {

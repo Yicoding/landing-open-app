@@ -1,2 +1,2 @@
 /** AppId */
-export const X_APPID = 'xxx';
+export const APPID = 'xxx';

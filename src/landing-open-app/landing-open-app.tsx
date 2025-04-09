@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useRef } from 'react';
-import { X_APPID } from '../_utils/constants';
+import { APPID } from '../_utils/constants';
 import { getPlatform, initWeixinOpenTag, jumpApp } from '../_utils/tools';
 import { WxLabelParams } from '../_utils/types';
 
@@ -11,9 +11,10 @@ type Props = WxLabelParams & {
 const LandingOpenApp: React.FC<Props> = ({
   ready,
   children,
-  appid = X_APPID,
+  appid = APPID,
   callBack,
   extraInfo,
+  extinfo,
 }) => {
   const wxRef = useRef<HTMLElement>(null);
 
@@ -25,8 +26,9 @@ const LandingOpenApp: React.FC<Props> = ({
       appid,
       callBack,
       extraInfo,
+      extinfo,
     });
-  }, [callBack, extraInfo, appid, ready]);
+  }, [callBack, extraInfo, appid, ready, extinfo]);
 
   // 点击事件
   const handleClick = () => {

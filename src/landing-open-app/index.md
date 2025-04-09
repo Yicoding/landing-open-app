@@ -29,6 +29,7 @@ yarn add landing-open-app
 | appid     | 所需跳转的移动应用的 AppID           | `string`              | -       |
 | extraInfo | 额外上报信息                         | `Record<string, any>` | `{}`    |
 | callBack  | 跳转成功后回调（可在此方法上报埋点） | `void`                | -       |
+| extinfo   | 跳转所需额外信息                     | `string`              | -       |
 
 ## 说明
 

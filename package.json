@@ -1,7 +1,7 @@
 {
   "name": "landing-open-app",
   "version": "1.0.2",
-  "description": "站外唤起app",
+  "description": "站外唤端组件，支持微信开放标签和其他浏览器环境",
   "bugs": {
     "url": "https://github.com/Yicoding/landing-open-app/issues"
   },
